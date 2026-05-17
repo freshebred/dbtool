@@ -395,7 +395,7 @@ app.get(BASE_PATH + '/{*path}', (req, res) => {
 // Also handle exact BASE_PATH (no trailing slash)
 if (BASE_PATH) {
   app.get(BASE_PATH, (req, res) => {
-    res.sendFile(path.join(publicDir, 'index.html'));
+    res.redirect(301, BASE_PATH + '/');
   });
 }
 

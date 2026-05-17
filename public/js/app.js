@@ -150,14 +150,16 @@ window.App = (function() {
 
   // ── Hardware Back Button (Android) ────────────────────────────────────────
   function initHardwareBack() {
+    const base = window.__PWADB_BASE__ || '';
+    const rootPath = base ? base + '/' : '/';
     window.addEventListener('popstate', () => {
       if (_stack.length > 0) {
         back();
-        history.pushState(null, '', '/');
+        history.pushState(null, '', rootPath);
       }
     });
     // Push initial state so popstate fires
-    history.pushState(null, '', '/');
+    history.pushState(null, '', rootPath);
   }
 
   // ── PWA Service Worker ────────────────────────────────────────────────────
