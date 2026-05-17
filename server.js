@@ -165,7 +165,7 @@ app.get(BASE_PATH + '/sw.js', (req, res) => {
 
   res.type('application/javascript');
   res.send(`
-const CACHE = 'pwadb-v1';
+const CACHE = 'pwadb-v2';
 const STATIC = ${JSON.stringify(STATIC)};
 const API_PREFIX = ${JSON.stringify(apiPrefix)};
 
