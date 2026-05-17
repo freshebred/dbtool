@@ -6,7 +6,7 @@ A PWA web app to connect to any MongoDB-compatible database.
 
 **Note:** The MongoDB connection string is sent to the server to establish a connection, but is **not** stored on the server.
 
-![pwaDb preview](public/screenshots/preview.png)
+![pwaDb preview](public/screenshots/preview2.png)
 
 # Features
 
