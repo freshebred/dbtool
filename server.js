@@ -107,28 +107,26 @@ app.get(BASE_PATH + '/js/config.js', (req, res) => {
  * Dynamic manifest with correct start_url and scope.
  */
 app.get(BASE_PATH + '/manifest.json', (req, res) => {
-  const base = BASE_PATH || '/';
-  const startUrl = BASE_PATH ? BASE_PATH + '/' : '/';
   res.json({
     name: 'pwaDb',
     short_name: 'pwaDb',
     description: 'Mobile-first MongoDB database manager',
-    start_url: startUrl,
-    scope: base,
+    start_url: './',
+    scope: './',
     display: 'standalone',
     background_color: '#020617',
     theme_color: '#020617',
     orientation: 'portrait',
     icons: [
-      { src: (BASE_PATH || '') + '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
-      { src: (BASE_PATH || '') + '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
+      { src: './icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+      { src: './icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
     ],
     categories: ['developer', 'utilities'],
     shortcuts: [{
       name: 'Add Connection',
       short_name: 'Connect',
-      url: startUrl + '?action=add',
-      icons: [{ src: (BASE_PATH || '') + '/icons/icon-192.png', sizes: '192x192' }],
+      url: './?action=add',
+      icons: [{ src: './icons/icon-192.png', sizes: '192x192' }],
     }],
   });
 });
