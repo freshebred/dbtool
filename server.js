@@ -14,6 +14,7 @@
  *   - AWS DocumentDB: mongodb://user:pass@cluster.docdb.amazonaws.com:27017/?tls=true
  */
 
+require('dotenv').config();
 const express = require('express');
 const cors    = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
@@ -165,7 +166,7 @@ app.get(BASE_PATH + '/sw.js', (req, res) => {
 
   res.type('application/javascript');
   res.send(`
-const CACHE = 'pwadb-v2';
+const CACHE = 'pwadb-v3';
 const STATIC = ${JSON.stringify(STATIC)};
 const API_PREFIX = ${JSON.stringify(apiPrefix)};
 
