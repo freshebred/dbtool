@@ -1,0 +1,7 @@
+node_modules/
+.env
+*.log
+design-system/
+.agent/
+.codex/
+/node_modules

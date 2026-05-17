@@ -1,0 +1,86 @@
+/* ─── Design Tokens ─────────────────────────────────────────────────────────
+   Based on ui-ux-pro-max design system for pwaDb
+   Style: Vibrant & Block-based | Font: Fira Code + Fira Sans
+   ──────────────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors — Dark Mode (default) */
+  --bg:          #020617;
+  --bg-elevated: #0F172A;
+  --bg-card:     #1E293B;
+  --bg-card-hover: #263348;
+  --border:      #334155;
+  --border-subtle: #1e293b;
+  --text:        #F8FAFC;
+  --text-muted:  #94A3B8;
+  --text-dim:    #64748B;
+  --accent:      #22C55E;
+  --accent-glow: rgba(34, 197, 94, 0.15);
+  --accent-dim:  #16A34A;
+  --danger:      #EF4444;
+  --danger-dim:  rgba(239, 68, 68, 0.12);
+  --warning:     #F59E0B;
+  --info:        #3B82F6;
+
+  /* Fonts */
+  --font-mono:   'Fira Code', 'Courier New', monospace;
+  --font-body:   'Fira Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.6);
+  --shadow-accent: 0 0 20px rgba(34, 197, 94, 0.2);
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 150ms;
+  --t-base: 250ms;
+  --t-slow: 350ms;
+  --t-slide: 280ms;
+
+  /* Layout */
+  --nav-h: 56px;
+  --max-w: 640px;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --bg:          #F1F5F9;
+  --bg-elevated: #FFFFFF;
+  --bg-card:     #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --border:      #E2E8F0;
+  --border-subtle: #F1F5F9;
+  --text:        #0F172A;
+  --text-muted:  #475569;
+  --text-dim:    #94A3B8;
+  --accent:      #16A34A;
+  --accent-glow: rgba(22, 163, 74, 0.1);
+  --accent-dim:  #15803D;
+  --danger:      #DC2626;
+  --danger-dim:  rgba(220, 38, 38, 0.08);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.1);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.12);
+  --shadow-accent: 0 0 20px rgba(22, 163, 74, 0.15);
+}

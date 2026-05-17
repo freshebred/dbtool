@@ -1,0 +1,154 @@
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+
+/* ── View Slide System ── */
+.view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: transform var(--t-slide) var(--ease),
+              opacity var(--t-slide) var(--ease);
+}
+
+.view.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.view.exit-left {
+  transform: translateX(-30%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.view.slide-back-enter {
+  transform: translateX(-30%);
+  opacity: 0;
+}
+
+/* ── View Container ── */
+#views {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Keyframes ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Item Reveal ── */
+.reveal {
+  animation: fade-in var(--t-base) var(--ease) both;
+}
+
+/* Staggered list items */
+.reveal-list > * {
+  animation: fade-in var(--t-base) var(--ease) both;
+}
+.reveal-list > *:nth-child(1) { animation-delay: 0ms; }
+.reveal-list > *:nth-child(2) { animation-delay: 40ms; }
+.reveal-list > *:nth-child(3) { animation-delay: 80ms; }
+.reveal-list > *:nth-child(4) { animation-delay: 120ms; }
+.reveal-list > *:nth-child(5) { animation-delay: 160ms; }
+.reveal-list > *:nth-child(6) { animation-delay: 200ms; }
+.reveal-list > *:nth-child(7) { animation-delay: 240ms; }
+.reveal-list > *:nth-child(n+8) { animation-delay: 280ms; }
+
+/* ── Connection pulse ── */
+.pulse {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ── Swipe delete ── */
+.swipe-content {
+  transition: transform var(--t-base) var(--ease);
+  will-change: transform;
+}
+.swipe-content.dragging {
+  transition: none;
+}
+
+/* ── FAB scale-in on mount ── */
+.fab {
+  animation: scale-in var(--t-slow) var(--ease) both;
+}
+
+/* ── Skeleton shimmer ── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    var(--bg-card-hover) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-radius: var(--r-md);
+  height: 1em;
+}
+@keyframes skeleton-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── Theme transition ── */
+html {
+  transition: background var(--t-base) var(--ease);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .view, .modal, .modal-backdrop {
+    transition: none !important;
+  }
+}

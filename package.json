@@ -1,0 +1,18 @@
+{
+  "name": "pwadb",
+  "version": "1.0.0",
+  "description": "Mobile-first PWA MongoDB Manager",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["mongodb", "pwa", "manager", "mobile"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0"
+  }
+}

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#020617" id="meta-theme-color" />
+  <meta name="description" content="Mobile-first PWA for managing MongoDB databases. Connect, browse, and perform CRUD operations on any MongoDB-compatible database." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="pwaDb" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>pwaDb — MongoDB Manager</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/animations.css" />
+
+  <!-- Inline SVG Icon Sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" id="icons">
+    <!-- database -->
+    <symbol id="ic-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>
+    </symbol>
+    <!-- collection/folder -->
+    <symbol id="ic-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+    </symbol>
+    <!-- document/file -->
+    <symbol id="ic-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+    </symbol>
+    <!-- plus -->
+    <symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    </symbol>
+    <!-- chevron-right -->
+    <symbol id="ic-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </symbol>
+    <!-- chevron-left -->
+    <symbol id="ic-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </symbol>
+    <!-- trash -->
+    <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+    </symbol>
+    <!-- edit -->
+    <symbol id="ic-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+    </symbol>
+    <!-- search -->
+    <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </symbol>
+    <!-- sun -->
+    <symbol id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </symbol>
+    <!-- moon -->
+    <symbol id="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </symbol>
+    <!-- link/plug -->
+    <symbol id="ic-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+    </symbol>
+    <!-- refresh -->
+    <symbol id="ic-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+    </symbol>
+    <!-- check -->
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"/>
+    </symbol>
+    <!-- x/close -->
+    <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </symbol>
+    <!-- alert-circle -->
+    <symbol id="ic-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+    </symbol>
+    <!-- copy -->
+    <symbol id="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </symbol>
+    <!-- server -->
+    <symbol id="ic-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
+    </symbol>
+    <!-- filter -->
+    <symbol id="ic-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+    </symbol>
+    <!-- key -->
+    <symbol id="ic-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+    </symbol>
+  </svg>
+
+  <style>
+    /* Inline critical styles for instant paint */
+    .view-content {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+    .list-group {
+      padding: var(--sp-3) var(--sp-4);
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .list-group-card {
+      padding: var(--sp-3) var(--sp-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    svg use { pointer-events: none; }
+    .icon { display: inline-block; width: 1em; height: 1em; }
+    #install-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--accent-glow);
+      border-bottom: 1px solid rgba(34,197,94,0.2);
+      gap: var(--sp-3);
+      flex-shrink: 0;
+    }
+    #install-banner.show { display: flex; }
+    #install-banner p { font-size: 0.82rem; color: var(--text-muted); flex: 1; }
+    #install-banner strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Install Banner -->
+    <div id="install-banner" role="banner">
+      <p>Install <strong>pwaDb</strong> on your home screen for the best experience.</p>
+      <button class="btn btn-primary btn-sm" id="btn-install">Install</button>
+      <button class="icon-btn" id="btn-install-dismiss" aria-label="Dismiss">
+        <svg><use href="#ic-x"/></svg>
+      </button>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- Views -->
+    <div id="views">
+      <!-- View: Connections (home) -->
+      <section class="view active" id="view-connections" aria-label="Saved connections">
+        <nav class="navbar">
+          <div class="navbar__title">
+            <div class="navbar__heading">pwaDb</div>
+            <div class="navbar__breadcrumb"><span>MongoDB Manager</span></div>
+          </div>
+          <div class="navbar__actions">
+            <button class="icon-btn" id="btn-theme" aria-label="Toggle theme">
+              <svg><use href="#ic-moon"/></svg>
+            </button>
+          </div>
+        </nav>
+        <div class="view-content" id="connections-content">
+          <!-- Filled by JS -->
+        </div>
+        <button class="fab" id="btn-add-connection" aria-label="Add new connection">
+          <svg><use href="#ic-plus"/></svg>
+        </button>
+      </section>
+
+      <!-- View: Databases -->
+      <section class="view" id="view-databases" aria-label="Databases">
+        <nav class="navbar">
+          <button class="navbar__back" id="btn-back-databases" aria-label="Back to connections">
+            <svg><use href="#ic-chevron-left"/></svg>
+          </button>
+          <div class="navbar__title">
+            <div class="navbar__heading" id="nav-db-heading">Databases</div>
+            <div class="navbar__breadcrumb" id="nav-db-breadcrumb"></div>
+          </div>
+          <div class="navbar__actions">
+            <button class="icon-btn" id="btn-refresh-databases" aria-label="Refresh">
+              <svg><use href="#ic-refresh"/></svg>
+            </button>
+          </div>
+        </nav>
+        <div class="view-content" id="databases-content"></div>
+      </section>
+
+      <!-- View: Collections -->
+      <section class="view" id="view-collections" aria-label="Collections">
+        <nav class="navbar">
+          <button class="navbar__back" id="btn-back-collections" aria-label="Back to databases">
+            <svg><use href="#ic-chevron-left"/></svg>
+          </button>
+          <div class="navbar__title">
+            <div class="navbar__heading" id="nav-col-heading">Collections</div>
+            <div class="navbar__breadcrumb" id="nav-col-breadcrumb"></div>
+          </div>
+          <div class="navbar__actions">
+            <button class="icon-btn" id="btn-refresh-collections" aria-label="Refresh">
+              <svg><use href="#ic-refresh"/></svg>
+            </button>
+          </div>
+        </nav>
+        <div class="view-content" id="collections-content"></div>
+      </section>
+
+      <!-- View: Documents -->
+      <section class="view" id="view-documents" aria-label="Documents">
+        <nav class="navbar">
+          <button class="navbar__back" id="btn-back-documents" aria-label="Back to collections">
+            <svg><use href="#ic-chevron-left"/></svg>
+          </button>
+          <div class="navbar__title">
+            <div class="navbar__heading" id="nav-docs-heading">Documents</div>
+            <div class="navbar__breadcrumb" id="nav-docs-breadcrumb"></div>
+          </div>
+          <div class="navbar__actions">
+            <button class="icon-btn accent" id="btn-new-document" aria-label="New document">
+              <svg><use href="#ic-plus"/></svg>
+            </button>
+            <button class="icon-btn" id="btn-refresh-documents" aria-label="Refresh">
+              <svg><use href="#ic-refresh"/></svg>
+            </button>
+          </div>
+        </nav>
+        <div class="search-bar">
+          <span class="search-bar__icon"><svg><use href="#ic-search"/></svg></span>
+          <input type="text" id="doc-search" placeholder='Filter: {"field": "value"}' autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="view-content" id="documents-content"></div>
+      </section>
+
+      <!-- View: Editor (Create / Edit) -->
+      <section class="view" id="view-editor" aria-label="Document editor">
+        <nav class="navbar">
+          <button class="navbar__back" id="btn-back-editor" aria-label="Back to documents">
+            <svg><use href="#ic-chevron-left"/></svg>
+          </button>
+          <div class="navbar__title">
+            <div class="navbar__heading" id="nav-editor-heading">New Document</div>
+            <div class="navbar__breadcrumb" id="nav-editor-breadcrumb"></div>
+          </div>
+          <div class="navbar__actions">
+            <button class="icon-btn" id="btn-editor-delete" aria-label="Delete document" style="display:none">
+              <svg><use href="#ic-trash"/></svg>
+            </button>
+            <button class="icon-btn" id="btn-editor-copy" aria-label="Copy JSON">
+              <svg><use href="#ic-copy"/></svg>
+            </button>
+          </div>
+        </nav>
+        <div class="view-content" style="padding-bottom: 120px;">
+          <div class="list-group-card">
+            <div class="form-group">
+              <label class="form-label" for="editor-json">Document JSON</label>
+              <textarea class="json-editor" id="editor-json" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" rows="20"></textarea>
+              <span class="form-error" id="editor-error"></span>
+              <span class="form-hint">Edit the JSON directly. _id is managed by MongoDB.</span>
+            </div>
+          </div>
+        </div>
+        <!-- Sticky save bar -->
+        <div style="position:fixed; bottom:0; left:0; right:0; padding: var(--sp-4); background: var(--bg-elevated); border-top: 1px solid var(--border-subtle); display:flex; gap: var(--sp-3); max-width: var(--max-w); margin: 0 auto; padding-bottom: calc(var(--sp-4) + env(safe-area-inset-bottom)); z-index: 10;">
+          <button class="btn btn-ghost" id="btn-editor-cancel" style="flex:1">Cancel</button>
+          <button class="btn btn-primary" id="btn-editor-save" style="flex:2">
+            <svg><use href="#ic-check"/></svg>
+            <span id="btn-editor-save-label">Save</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Add Connection Modal -->
+  <div class="modal-backdrop" id="modal-add-conn" role="dialog" aria-modal="true" aria-label="Add connection">
+    <div class="modal">
+      <div class="modal__handle"></div>
+      <h2 class="modal__title">New Connection</h2>
+      <div class="form-group">
+        <label class="form-label" for="conn-name">Connection Name</label>
+        <input type="text" id="conn-name" placeholder="My Atlas Cluster" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="conn-uri">Connection String</label>
+        <input type="url" id="conn-uri" placeholder="mongodb+srv://user:pass@cluster.mongodb.net/" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" />
+        <span class="form-hint" id="conn-uri-hint">Supports: MongoDB, Atlas SRV, Azure CosmosDB, AWS DocumentDB</span>
+        <span class="form-error" id="conn-uri-error"></span>
+        <div id="conn-uri-type" style="margin-top: var(--sp-2);"></div>
+      </div>
+      <div class="modal__actions">
+        <button class="btn btn-ghost" id="btn-conn-cancel">Cancel</button>
+        <button class="btn btn-primary" id="btn-conn-save">
+          <svg><use href="#ic-plug"/></svg>
+          Connect
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Modal -->
+  <div class="modal-backdrop" id="modal-confirm" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal__handle"></div>
+      <h2 class="modal__title" id="modal-confirm-title">Are you sure?</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;" id="modal-confirm-body"></p>
+      <div class="modal__actions">
+        <button class="btn btn-ghost" id="btn-confirm-cancel">Cancel</button>
+        <button class="btn btn-danger" id="btn-confirm-ok">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Base path injected by server -->
+  <script src="./js/config.js"></script>
+  <!-- JS modules -->
+  <script src="./js/components/theme.js"></script>
+  <script src="./js/components/toast.js"></script>
+  <script src="./js/components/modal.js"></script>
+  <script src="./js/db.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/views/connections.js"></script>
+  <script src="./js/views/databases.js"></script>
+  <script src="./js/views/collections.js"></script>
+  <script src="./js/views/documents.js"></script>
+  <script src="./js/views/editor.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
