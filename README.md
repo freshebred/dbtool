@@ -1,4 +1,4 @@
-bro the only app on iphone that supports azure cosmosdb mongoDB compatible is mongoLime and it's 399.000VND ... so AI made one for me :) thanks gemini.
+bro the only app on iphone that supports azure cosmosdb mongoDB compatible is mongoLime and it's 399.000VND ... so AI made one for me :) thanks gemini. i love you
 
 # Introduction
 
